@@ -23,6 +23,7 @@ def upload():
         filename = secure_filename(form.file.data.filename)
         root_dir = os.path.dirname(app.instance_path)
         form.file.data.save(os.path.join(root_dir, 'uploads', filename))
+        # ToDo: Submit to the YouTube API: https://developers.google.com/youtube/v3/guides/uploading_a_video
         flash("Received your file, thanks!")
         return redirect(url_for('upload'))
     # If it's a GET, render the form as normal.
