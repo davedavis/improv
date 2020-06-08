@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Upload your video for the improv show.">
+    <meta name="author" content="Dave Davis">
     <link rel="icon" href="/favicon.ico">
     <link rel="canonical" href="https://www.improv.com">
 
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/improv.css') }}">
 
 
   </head>
@@ -24,15 +24,15 @@
         <div class="inner">
           <h3 class="masthead-brand">Improv</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Upload</a>
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
+            <a class="nav-link" href="{{ url_for('upload') }}">Upload</a>
+            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
           </nav>
         </div>
       </header>
 
       <main role="main" class="inner cover">
-         <article class="flashes">
+         <article id="flashes">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         <ul>
