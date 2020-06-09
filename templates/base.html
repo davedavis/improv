@@ -28,9 +28,12 @@
         <div class="inner">
           <h3 class="masthead-brand">Improv</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
-            <a class="nav-link" href="{{ url_for('upload') }}">Upload</a>
-            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+{#            <a class="nav-link active" href="{{ url_for('index') }}">Home</a>#}
+{#            <a class="nav-link" href="{{ url_for('upload') }}">Upload</a>#}
+{#            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>#}
+              <a class="{{ 'nav-link active' if active_page == 'index' else 'nav-link' }}" href="{{ url_for('index') }}">Home</a>
+              <a class="{{ 'nav-link active' if active_page == 'upload' else 'nav-link' }}" href="{{ url_for('upload') }}">Upload</a>
+              <a class="{{ 'nav-link active' if active_page == 'contact' else 'nav-link' }}" href="{{ url_for('contact') }}">Contact</a>
           </nav>
         </div>
       </header>
