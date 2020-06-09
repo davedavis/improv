@@ -24,10 +24,20 @@ def upload():
         root_dir = os.path.dirname(app.instance_path)
         form.file.data.save(os.path.join(root_dir, 'uploads', filename))
         # ToDo: Submit to the YouTube API: https://developers.google.com/youtube/v3/guides/uploading_a_video
-        flash("Received your file, thanks!")
+        flash("We received your video, thanks! We'll process it and approve it soon. ")
         return redirect(url_for('upload'))
     # If it's a GET, render the form as normal.
     return render_template('upload.html', form=form)
+
+
+@app.route('/tags')
+def tags():
+    return render_template('tags.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 @app.route('/contact')
@@ -35,5 +45,22 @@ def contact():
     return render_template('contact.html')
 
 
+# Error handling.
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
+
+
 if __name__ == '__main__':
     app.run()
+
+# ToDo: Add user models
+# ToDo: Add Local SQLAlchemy DB (MySQL)
+# ToDo: Associate uploads and tags with users.
+# ToDo: Add SSO/Google login and SignUp (Flask Dance integrates well with Flask-Login and Flask-Security)
+# ToDo: Create Scaffolding Project
