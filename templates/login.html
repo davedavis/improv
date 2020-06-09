@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set active_page = "login" %}
+{% from "form_macros.html" import render_field %}
+
+{% block title %}
+Improv - Login
+{% endblock %}
+
+{% block content %}
+ <article>
+         <h1 class="cover-heading">Website Login</h1>
+         <p class="lead">Login Below</p>
+
+        <form action="" method="post" >
+            {{ form.hidden_tag() }}
+            {{ render_field(form.username, size=50) }}
+            {{ render_field(form.password, size=50) }}
+            {{ render_field(form.remember_me) }}
+            {{ render_field(form.submit) }}
+{#            {{ form.hidden_tag() }}#}
+{#            {{ form.username }}#}
+{#            {{ form.password }}#}
+{#            {{ form.remember_me }}#}
+{#            {{ form.submit }}#}
+        </form>
+ 
+ </article>
+{% endblock %}

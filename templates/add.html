@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% set active_page = "upload" %}
+{% set active_page = "add" %}
+{% from "form_macros.html" import render_field %}
 
 {% block title %}
 Improv - Share Your Story
@@ -13,6 +14,8 @@ Improv - Share Your Story
 
         <form method="post" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
+            {{ render_field(form.url, size=50) }}
+            {{ render_field(form.description, size=50) }}
             {{ form.file }}
             <input type="submit">
             {# ToDo : Add styling to buttons on upload form.#}

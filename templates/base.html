@@ -28,10 +28,11 @@
 {#            <a class="nav-link" href="{{ url_for('upload') }}">Upload</a>#}
 {#            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>#}
               <a class="{{ 'nav-link active' if active_page == 'index' else 'nav-link' }}" href="{{ url_for('index') }}">Home</a>
-              <a class="{{ 'nav-link active' if active_page == 'upload' else 'nav-link' }}" href="{{ url_for('upload') }}">Upload</a>
-              <a class="{{ 'nav-link active' if active_page == 'tags' else 'nav-link' }}" href="{{ url_for('tags') }}">Tags</a>
               <a class="{{ 'nav-link active' if active_page == 'about' else 'nav-link' }}" href="{{ url_for('about') }}">About</a>
               <a class="{{ 'nav-link active' if active_page == 'contact' else 'nav-link' }}" href="{{ url_for('contact') }}">Contact</a>
+              <a class="{{ 'nav-link active' if active_page == 'add' else 'nav-link' }}" href="{{ url_for('add') }}">Add</a>
+              <a class="{{ 'nav-link active' if active_page == 'tags' else 'nav-link' }}" href="{{ url_for('tags') }}">Tags</a>
+              <a class="{{ 'nav-link active' if active_page == 'login' else 'nav-link' }}" href="{{ url_for('login') }}">Login</a>
           </nav>
         </div>
       </header>
