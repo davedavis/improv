@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% set active_page = "signup" %}
+{% from "form_macros.html" import render_field %}
+{% block title %}
+Thermos - Signup
+{% endblock %}
+
+{% block content %}
+ <article>
+         <h1 class="cover-heading">Website Login</h1>
+         <p class="lead">Login Below</p>
+
+         <form action="" method="post" >
+            {{ form.hidden_tag() }}
+            <table>
+                {{ render_field(form.username, size=50) }}
+                {{ render_field(form.email, size=50) }}
+                {{ render_field(form.password, size=50) }}
+                {{ render_field(form.password2, size=50) }}
+
+                <tr class="submit">
+                    <td></td>
+                    <td>
+                        <button type="submit">Submit and Sign Up!</button>
+                    </td>
+                </tr>
+
+            </table>
+         </form>
+
+ </article>
+{% endblock %}
+
+
+{% block sidebar %}
+{% endblock %}

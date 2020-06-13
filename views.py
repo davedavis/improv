@@ -1,12 +1,12 @@
 import os
 
 from flask import render_template, flash, redirect, url_for, request
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 
 from app import app, db, login_manager
-from forms import BookmarkForm, LoginForm
-from models import User, Bookmark
+from forms import VideoUploadForm, LoginForm, SignupForm
+from models import User, Video
 
 
 @login_manager.user_loader
@@ -35,9 +35,10 @@ def contact():
 
 
 @app.route('/add', methods=['GET', 'POST'])
+@login_required
 def add():
     # Create a new BookmarkForm instance.
-    form = BookmarkForm()
+    form = VideoUploadForm()
     # Validate the form, store the bookmarks and redirect to the index.
     if form.validate_on_submit():
         url = form.url.data
@@ -46,8 +47,8 @@ def add():
         root_dir = os.path.dirname(app.instance_path)
         form.file.data.save(os.path.join('static/uploads', filename))
         filepath = os.path.join(root_dir, 'static/uploads', filename)
-        bm = Bookmark(user=current_user, url=url, description=description, file_path=filepath)
-        db.session.add(bm)
+        uservideo = Video(user=current_user, url=url, description=description, file_path=filepath)
+        db.session.add(uservideo)
         db.session.commit()
         flash("Thank's for submitting'{}', we'll review it and let you know when it's published.".format(description))
         return redirect(url_for('index'))
@@ -71,6 +72,27 @@ def login():
             return redirect(request.args.get('next') or url_for('index'))
         flash("Sorry, incorrect username or password. Please try again.")
     return render_template('login.html', form=form)
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        # ToDo: Change user variable names so there's no warning. Even though they're scope safe.
+        new_user = User(email=form.email.data,
+                        username=form.username.data,
+                        password=form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Welcome to Thermos {}! Please login with the details you provided".format(new_user.username))
+        return redirect(url_for('login'))
+    return render_template('signup.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 # Error handling.
